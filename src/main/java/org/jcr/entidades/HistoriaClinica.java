@@ -1,5 +1,8 @@
 package org.jcr.entidades;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,12 +10,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+
 public class HistoriaClinica implements Serializable {
     private final String numeroHistoria;
     private final Paciente paciente;
     private final LocalDateTime fechaCreacion;
+
+    // Campos excluidos de Lombok, se mantienen manuales
+    @Getter(AccessLevel.NONE)
     private final List<String> diagnosticos = new ArrayList<>();
+    @Getter(AccessLevel.NONE)
     private final List<String> tratamientos = new ArrayList<>();
+    @Getter(AccessLevel.NONE)
     private final List<String> alergias = new ArrayList<>();
 
     public HistoriaClinica(Paciente paciente) {
@@ -25,16 +35,16 @@ public class HistoriaClinica implements Serializable {
         return "HC-" + paciente.getDni() + "-" + fechaCreacion.getYear();
     }
 
-    public String getNumeroHistoria() {
-        return numeroHistoria;
+    public List<String> getDiagnosticos() {
+        return Collections.unmodifiableList(diagnosticos);
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public List<String> getTratamientos() {
+        return Collections.unmodifiableList(tratamientos);
     }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
+    public List<String> getAlergias() {
+        return Collections.unmodifiableList(alergias);
     }
 
     public void agregarDiagnostico(String diagnostico) {
@@ -55,17 +65,6 @@ public class HistoriaClinica implements Serializable {
         }
     }
 
-    public List<String> getDiagnosticos() {
-        return Collections.unmodifiableList(diagnosticos);
-    }
-
-    public List<String> getTratamientos() {
-        return Collections.unmodifiableList(tratamientos);
-    }
-
-    public List<String> getAlergias() {
-        return Collections.unmodifiableList(alergias);
-    }
 
     @Override
     public String toString() {

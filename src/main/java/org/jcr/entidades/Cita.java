@@ -1,9 +1,13 @@
 package org.jcr.entidades;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
+
+@Getter
 
 public class Cita implements Serializable {
     private final Paciente paciente;
@@ -24,36 +28,8 @@ public class Cita implements Serializable {
         this.observaciones = "";
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public Sala getSala() {
-        return sala;
-    }
-
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
-    }
-
-    public BigDecimal getCosto() {
-        return costo;
-    }
-
-    public EstadoCita getEstado() {
-        return estado;
-    }
-
     public void setEstado(EstadoCita estado) {
         this.estado = Objects.requireNonNull(estado, "El estado no puede ser nulo");
-    }
-
-    public String getObservaciones() {
-        return observaciones;
     }
 
     public void setObservaciones(String observaciones) {

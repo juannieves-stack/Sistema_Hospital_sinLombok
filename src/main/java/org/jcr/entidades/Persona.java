@@ -1,7 +1,11 @@
 package org.jcr.entidades;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+
+@Getter
 
 public abstract class Persona implements Serializable {
     protected final String nombre;
@@ -16,26 +20,6 @@ public abstract class Persona implements Serializable {
         this.dni = validarDni(dni);
         this.fechaNacimiento = Objects.requireNonNull(fechaNacimiento, "La fecha de nacimiento no puede ser nula");
         this.tipoSangre = Objects.requireNonNull(tipoSangre, "El tipo de sangre no puede ser nulo");
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public TipoSangre getTipoSangre() {
-        return tipoSangre;
     }
 
     public String getNombreCompleto() {

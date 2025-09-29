@@ -1,5 +1,10 @@
 package org.jcr.entidades;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 
 public enum EspecialidadMedica {
     CARDIOLOGIA("Cardiología"),
@@ -17,11 +22,4 @@ public enum EspecialidadMedica {
 
     private final String descripcion;
 
-    EspecialidadMedica(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
 }

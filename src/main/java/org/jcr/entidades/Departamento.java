@@ -1,15 +1,23 @@
 package org.jcr.entidades;
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+@Getter
 
 public class Departamento implements Serializable {
     private final String nombre;
     private final EspecialidadMedica especialidad;
     private Hospital hospital;
+    // Campos excluidos de Lombok, se mantienen manuales
+    @Getter(AccessLevel.NONE)
     private final List<Medico> medicos = new ArrayList<>();
+    // Campos excluidos de Lombok, se mantienen manuales
+    @Getter(AccessLevel.NONE)
     private final List<Sala> salas = new ArrayList<>();
 
     public Departamento(String nombre, EspecialidadMedica especialidad) {
@@ -17,16 +25,12 @@ public class Departamento implements Serializable {
         this.especialidad = Objects.requireNonNull(especialidad, "La especialidad no puede ser nula");
     }
 
-    public String getNombre() {
-        return nombre;
+    public List<Medico> getMedicos() {
+        return Collections.unmodifiableList(medicos);
     }
 
-    public EspecialidadMedica getEspecialidad() {
-        return especialidad;
-    }
-
-    public Hospital getHospital() {
-        return hospital;
+    public List<Sala> getSalas() {
+        return Collections.unmodifiableList(salas);
     }
 
     public void setHospital(Hospital hospital) {
@@ -52,14 +56,6 @@ public class Departamento implements Serializable {
         Sala sala = new Sala(numero, tipo, this);
         salas.add(sala);
         return sala;
-    }
-
-    public List<Medico> getMedicos() {
-        return Collections.unmodifiableList(medicos);
-    }
-
-    public List<Sala> getSalas() {
-        return Collections.unmodifiableList(salas);
     }
 
     @Override

@@ -1,17 +1,24 @@
 package org.jcr.entidades;
 
+
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+@Getter
 
 public class Paciente extends Persona implements Serializable {
     private final HistoriaClinica historiaClinica;
     private final String telefono;
     private final String direccion;
     private Hospital hospital;
+    // Campos excluidos de Lombok, se mantienen manuales
+    @Getter(AccessLevel.NONE)
     private final List<Cita> citas = new ArrayList<>();
 
     public Paciente(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
@@ -26,16 +33,8 @@ public class Paciente extends Persona implements Serializable {
         return historiaClinica;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public Hospital getHospital() {
-        return hospital;
+    public List<Cita> getCitas() {
+        return Collections.unmodifiableList(new ArrayList<>(citas));
     }
 
     public void setHospital(Hospital hospital) {
@@ -54,9 +53,6 @@ public class Paciente extends Persona implements Serializable {
         this.citas.add(cita);
     }
 
-    public List<Cita> getCitas() {
-        return Collections.unmodifiableList(new ArrayList<>(citas));
-    }
 
     private String validarString(String valor, String mensajeError) {
         Objects.requireNonNull(valor, mensajeError);
@@ -66,7 +62,7 @@ public class Paciente extends Persona implements Serializable {
         return valor;
     }
 
-    @Override
+     @Override
     public String toString() {
         return "Paciente{" +
                 "nombre='" + nombre + '\'' +

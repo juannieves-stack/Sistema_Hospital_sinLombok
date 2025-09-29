@@ -1,17 +1,18 @@
 package org.jcr.entidades;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.Objects;
+@ToString
+@Getter
 
 public class Matricula implements Serializable {
     private final String numero;
 
     public Matricula(String numero) {
         this.numero = validarMatricula(numero);
-    }
-
-    public String getNumero() {
-        return numero;
     }
 
     private String validarMatricula(String numero) {
@@ -22,10 +23,4 @@ public class Matricula implements Serializable {
         return numero;
     }
 
-    @Override
-    public String toString() {
-        return "Matricula{" +
-                "numero='" + numero + '\'' +
-                '}';
-    }
 }

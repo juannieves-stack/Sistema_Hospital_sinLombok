@@ -1,15 +1,22 @@
 package org.jcr.entidades;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+
 public class Sala implements Serializable {
     private final String numero;
     private final String tipo;
     private final Departamento departamento;
+    // Campos excluidos de Lombok, se mantienen manuales
+    @Getter(AccessLevel.NONE)
     private final List<Cita> citas = new ArrayList<>();
 
     public Sala(String numero, String tipo, Departamento departamento) {
@@ -18,25 +25,14 @@ public class Sala implements Serializable {
         this.departamento = Objects.requireNonNull(departamento, "El departamento no puede ser nulo");
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public Departamento getDepartamento() {
-        return departamento;
+    public List<Cita> getCitas() {
+        return Collections.unmodifiableList(new ArrayList<>(citas));
     }
 
     public void addCita(Cita cita) {
         this.citas.add(cita);
     }
 
-    public List<Cita> getCitas() {
-        return Collections.unmodifiableList(new ArrayList<>(citas));
-    }
 
     private String validarString(String valor, String mensajeError) {
         Objects.requireNonNull(valor, mensajeError);
