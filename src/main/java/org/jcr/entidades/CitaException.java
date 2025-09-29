@@ -1,14 +1,7 @@
 package org.jcr.entidades;
 
+import lombok.experimental.StandardException;
 
-public class CitaException extends Exception {
-
-    public CitaException(String message) {
-        super(message);
-    }
-
-    public CitaException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}
+@StandardException
+public class CitaException extends Exception { }
 

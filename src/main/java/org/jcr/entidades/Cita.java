@@ -1,5 +1,6 @@
 package org.jcr.entidades;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,7 +9,6 @@ import java.util.Map;
 import java.util.Objects;
 
 @Getter
-
 public class Cita implements Serializable {
     private final Paciente paciente;
     private final Medico medico;
